@@ -68,24 +68,39 @@ function Navbar() {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle Button (Shown on small screens, hidden on md) */}
-        <button 
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-gray-600 hover:text-black focus:outline-none"
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? (
-            // Close (X) Icon
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            // Hamburger Menu Icon
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
-        </button>
+        {/* Mobile Menu Toggle Button (With micro-indicators and smooth rotation) */}
+        <div className="md:hidden flex items-center gap-2">
+          {/* Hint text that softly flashes to draw attention */}
+          <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase animate-pulse">
+            {isOpen ? "Close" : "Menu"}
+          </span>
+          
+          <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className="relative p-2.5 text-gray-600 hover:text-black focus:outline-none bg-white border border-gray-200/80 rounded-full shadow-sm transform transition-all duration-300 hover:scale-105 active:scale-95"
+            aria-label="Toggle Menu"
+          >
+            {/* Micro blue glowing radar dot to show it's live and clickable */}
+            {!isOpen && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#1D4ED8]"></span>
+              </span>
+            )}
+
+            {isOpen ? (
+              // Snappy close transition
+              <svg className="w-5 h-5 transform rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              // Snappy burger icons
+              <svg className="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
 
       </div>
 

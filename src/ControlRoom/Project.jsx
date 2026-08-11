@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 export default function Project() {
   const works = [
@@ -8,7 +8,17 @@ export default function Project() {
       statusColor: "bg-green-50 text-green-700 border-green-200",
       description: "A modern personal finance dashboard engine designed to help users monitor and manage complex capital trends. Built to handle secure transaction mapping, responsive financial budgets, and data analytics streams through real-time chart layers.",
       tech: ["React Context API", "Tailwind CSS", "Dynamic Charts", "Routing Layouts"],
-      type: "FinTech Module"
+      type: "FinTech Module",
+      projectLink: "https://prism-view.vercel.app" // 👈 Add your link here
+    },
+    {
+      title: "Student Hub Platform",
+      status: "Completed",
+      statusColor: "bg-green-50 text-green-700 border-green-200",
+      description: "A centralized digital ecosystem built to streamline academic workflows and foster collaboration. Features secure resource hubs, real-time assignment schedule logs, peer study grouping networks, and responsive management tools optimized for mobile and desktop screens.",
+      tech: ["React.jsx", "Tailwind CSS", "State Architecture", "Modular UI Layouts"],
+      type: "EduTech Application",
+      projectLink: "https://studenthub-black.vercel.app/" // 👈 Add your link here
     },
     {
       title: "Modern Portfolio Website",
@@ -16,7 +26,8 @@ export default function Project() {
       statusColor: "bg-green-50 text-green-700 border-green-200",
       description: "A premium developer platform designed to display codebase capabilities with a strict emphasis on performance metric marks. Focuses on high-end typography structures, micro-interactions, custom routing hooks, and sleek device adaptability.",
       tech: ["React Engine", "Tailwind UI", "Cubic-Bezier Motion", "Semantic Architecture"],
-      type: "Product System"
+      type: "Product System",
+      projectLink: "Home" // 👈 Add your link here
     },
     {
       title: "AI-Powered Forex Market Analysis Platform",
@@ -25,7 +36,8 @@ export default function Project() {
       isLive: true,
       description: "An ambitious intelligent monitoring environment merging Frontend Engineering, AI patterns, and FinTech. Formulated to capture institutional patterns (SMC/ICT), scan market structure maps, detect order blocks, and output valid trade confirmation setups without automated scripting dependencies.",
       tech: ["Advanced React Patterns", "AI Integration", "Market Scanner Layouts", "SMC Pattern Engines"],
-      type: "FinTech R&D Engine"
+      type: "FinTech R&D Engine",
+      projectLink: "#" // 👈 Add your link here
     }
   ];
 
@@ -51,9 +63,12 @@ export default function Project() {
         {/* ================= WORK CARD SHOWCASE CONTAINER ================= */}
         <div className="space-y-12">
           {works.map((item, index) => (
-            <div 
-              key={index} 
-              className="bg-white border border-gray-200/60 p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:border-gray-300"
+            <a 
+              key={index}
+              href={item.projectLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white border border-gray-200/60 p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:border-gray-400 group cursor-pointer"
             >
               {/* Top Banner Tagging Row */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
@@ -74,10 +89,22 @@ export default function Project() {
                 </div>
               </div>
 
-              {/* Title Header */}
-              <h2 className="text-2xl font-black tracking-tight text-black mb-4">
-                {item.title}
-              </h2>
+              {/* Title Header with Sliding Indicator Arrow */}
+              <div className="flex items-center justify-between gap-4 mb-4">
+                <h2 className="text-2xl font-black tracking-tight text-black transition-colors group-hover:text-[#1D4ED8]">
+                  {item.title}
+                </h2>
+                {/* Clean Micro-animated Arrow */}
+                <svg 
+                  className="w-5 h-5 text-gray-400 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[#1D4ED8] flex-shrink-0" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
+              </div>
 
               {/* Description Body Text */}
               <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6 font-normal">
@@ -95,7 +122,7 @@ export default function Project() {
                   </span>
                 ))}
               </div>
-            </div>
+            </a>
           ))}
         </div>
 

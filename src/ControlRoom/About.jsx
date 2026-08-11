@@ -100,63 +100,39 @@ const About = () => {
         </section>
 
         <hr className="border-gray-200 my-12" />
-        {/* ================= PROJECT FOCUS SECTION ================= */}
+             {/* ================= NEW: WORK METHOD & APPROACH SECTION ================= */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase">Project Focus</h2>
-          <div className="md:col-span-2 space-y-6">
-            <p className="text-gray-600 leading-relaxed">
-              Throughout my journey as a developer, I've had the opportunity to build various projects that challenged me to think critically, solve real-world problems, and continuously improve my craft. Rather than focusing on numbers, I focus on scalable, user-centered solutions. Every project contributes to my growth and reflects my commitment to writing clean, maintainable code while delivering exceptional user experiences. Among the projects I've built, a few stand out as milestones in my development journey.
-            </p>
-
-            {/* Project 1 */}
-            <div className="bg-white border border-gray-200/60 p-6 rounded-2xl shadow-sm">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-extrabold text-lg">PrismView — Personal Finance Dashboard</h3>
-                <span className="bg-green-50 text-green-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Completed</span>
-              </div>
-              <p className="text-gray-500 text-sm mb-4 leading-relaxed">
-                PrismView is a modern personal finance dashboard designed to help users monitor and manage their financial activities through an intuitive and visually engaging interface. Key features include Expense Tracking, Transaction Management, Budget Monitoring, Financial Analytics, Goal Tracking, Reports Dashboard, Interactive Charts, and a Fully Responsive Design. This project strengthened my understanding of React architecture, Context API, reusable components, routing, state management, and creating intuitive user interfaces.
+          <h2 className="text-xs font-black tracking-widest text-gray-400 uppercase">My Approach</h2>
+          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            {/* Block 1: Design to Code */}
+            <div className="bg-white border border-gray-200/60 p-5 rounded-xl shadow-sm">
+              <h4 className="text-base font-bold text-black mb-2">Pixel Discipline</h4>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                I bridge the gap between design systems and engineering. I translate complex design mockups into semantic, fluid, and scalable UI layouts with pixel-perfect accuracy.
               </p>
-              <div className="text-[11px] text-gray-400 font-semibold uppercase">React Context API • Analytics Layout Engine</div>
             </div>
 
-            {/* Project 2 */}
-            <div className="bg-white border border-gray-200/60 p-6 rounded-2xl shadow-sm">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-extrabold text-lg">Modern Portfolio Website</h3>
-                <span className="bg-green-50 text-green-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Completed</span>
-              </div>
-              <p className="text-gray-500 text-sm mb-4 leading-relaxed">
-                A premium developer portfolio designed to showcase my skills, projects, and professional journey. Built with React and Tailwind CSS, the portfolio focuses on performance, clean aesthetics, smooth interactions, and responsive design while reflecting my personal approach to frontend development.
+            {/* Block 2: Performance First */}
+            <div className="bg-white border border-gray-200/60 p-5 rounded-xl shadow-sm">
+              <h4 className="text-base font-bold text-black mb-2">Performance Optimization</h4>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                Clean software isn't just about functional code; it's about speed. I focus on optimizing bundle sizes, clean asset loading, and fast interactions for high core web vitals.
               </p>
-              <div className="text-[11px] text-gray-400 font-semibold uppercase">Built with React • Tailwind CSS • Semantic Architecture</div>
             </div>
 
-            {/* In Progress Project */}
-            <div className="bg-blue-50/50 border border-blue-100 p-6 rounded-2xl">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-                </span>
-                <h3 className="font-extrabold text-lg text-black">AI-Powered Forex Market Analysis Platform</h3>
-                <span className="ml-auto bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">In Progress</span>
-              </div>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                One of my most ambitious projects is an intelligent Forex market analysis platform that combines modern web technologies with artificial intelligence to assist traders in making informed decisions. Instead of automating trades, the platform is designed to provide meaningful market insights, simplify technical analysis, and help traders identify high-probability opportunities with greater confidence. This project represents the perfect intersection of my passions for Frontend Engineering, Artificial Intelligence, and Financial Technology (FinTech).
+            {/* Block 3: Architecture */}
+            <div className="bg-white border border-gray-200/60 p-5 rounded-xl shadow-sm sm:col-span-2">
+              <h4 className="text-base font-bold text-black mb-2">Maintainable Component Systems</h4>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                I write highly reusable, atomic components backed by clean architecture. This ensures that the frontend codebases I create are clean, well-structured, and effortless for engineering teams to scale or maintain later.
               </p>
-              <h4 className="text-xs font-bold text-gray-400 tracking-wider uppercase mt-4 mb-2">Planned Features:</h4>
-              <div className="flex flex-wrap gap-1.5 text-[10px] text-gray-700">
-                <span className="bg-white border border-gray-200 px-2 py-1 rounded">AI Market Scanner</span>
-                <span className="bg-white border border-gray-200 px-2 py-1 rounded">SMC Detection</span>
-                <span className="bg-white border border-gray-200 px-2 py-1 rounded">ICT Pattern Recognition</span>
-                <span className="bg-white border border-gray-200 px-2 py-1 rounded">Fair Value Gap (FVG)</span>
-                <span className="bg-white border border-gray-200 px-2 py-1 rounded">Order Block Detection</span>
-                <span className="bg-white border border-gray-200 px-2 py-1 rounded">Liquidity Analysis</span>
-              </div>
             </div>
+
           </div>
         </section>
+
+        <hr className="border-gray-200 my-12" />
 
 
                 {/* ================= BACKGROUND OVERVIEW SECTION ================= */}
@@ -167,7 +143,7 @@ const About = () => {
             {/* Experience Card */}
             <div className="bg-white border border-gray-200/60 p-5 rounded-xl shadow-sm">
               <span className="text-xs font-bold text-gray-400 tracking-wider uppercase block mb-1">Experience</span>
-              <h4 className="text-xl font-bold text-black mb-1">3+ Years Professional</h4>
+              <h4 className="text-xl font-bold text-black mb-1">1+ Years Professional</h4>
               <p className="text-sm text-gray-500 leading-normal">Building custom React software architectures, pixel-perfect responsive layouts, and interactive dashboards.</p>
             </div>
 
@@ -184,14 +160,15 @@ const About = () => {
               <p className="text-sm text-gray-500 leading-normal">Available immediately for remote international contracts, full-time engineering roles, or freelance design scopes.</p>
             </div>
 
-            {/* Education Qualification Card */}
-            <div className="bg-white border border-gray-200/60 p-5 rounded-xl shadow-sm sm:col-span-2">
-              <span className="text-xs font-bold text-gray-400 tracking-wider uppercase block mb-1">Education & Qualifications</span>
-              <h4 className="text-lg font-bold text-black mb-1">Self-Taught & Professionally Certified Frontend Engineer</h4>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Extensive technical specialization built through rigorous hands-on engineering, open-source building, and continuous technical studies in advanced system patterns, design systems, and frontend frameworks.
-              </p>
-            </div>
+           {/* Education Qualification Card */}
+<div className="bg-white border border-gray-200/60 p-5 rounded-xl shadow-sm sm:col-span-2">
+  <span className="text-xs font-bold text-gray-400 tracking-wider uppercase block mb-1">Education & Qualifications</span>
+  <h4 className="text-lg font-bold text-black mb-1">Frontend Engineering Fellow — TalentPort</h4>
+  <p className="text-sm text-gray-500 leading-relaxed">
+    Undergoing intensive professional frontend development training and residency at <span className="text-black font-semibold">TalentPort (Uyo, Akwa Ibom State)</span>. Specialising in turning complex pixel mockups into production-ready software systems, master class state architecture, and maintainable, enterprise-level design systems.
+  </p>
+</div>
+
 
           </div>
         </section>
