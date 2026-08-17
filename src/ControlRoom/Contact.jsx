@@ -153,13 +153,12 @@ export default function Contact() {
             CONNECT
           </div>
 
-          <h1 className="text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl">
-            Let's Build Something
-            <br className="hidden sm:block" />
-            <span className="text-[#1D4ED8]">
-              Exceptional Together.
-            </span>
-          </h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] mb-6 max-w-3xl">
+  Let's Build Something{" "}
+  <span className="text-[#1D4ED8]">
+    Exceptional Together.
+  </span>
+</h1>
 
           <p className="mt-7 max-w-2xl text-base leading-7 text-gray-500 sm:text-lg sm:leading-8">
             Have an interesting project, a full-time opportunity, or want to
