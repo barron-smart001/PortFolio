@@ -38,7 +38,7 @@ export default function Home() {
             rounded-full
             bg-[#1D4ED8]/10
             blur-[100px]
-            animate-[orbTwo_13s_ease-in-out_infinite]
+            animate-[orbTwo_10s_ease-in-out_infinite]
           "
         />
 
@@ -53,7 +53,7 @@ export default function Home() {
             rounded-full
             bg-[#1D4ED8]/[0.07]
             blur-[110px]
-            animate-[orbThree_15s_ease-in-out_infinite]
+            animate-[orbThree_10s_ease-in-out_infinite]
           "
         />
 
@@ -111,7 +111,7 @@ export default function Home() {
               <span className="relative h-1.5 w-1.5 rounded-full bg-blue-600" />
             </span>
 
-            WEB DEVELOPER — LAGOS, NG
+            WEB DEVELOPER — Akwa Ibom, NG
           </div>
 
           {/* Heading */}
