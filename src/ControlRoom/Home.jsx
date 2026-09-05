@@ -1,7 +1,175 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId;
+    let particles = [];
+    let time = 0;
+    
+    // Dynamic interactive coordinate tracking
+    const mouse = {
+      x: null,
+      y: null,
+      targetX: null,
+      targetY: null
+    };
+
+    // Configuration parameters matching the official site layout
+    const ROWS = 15;
+    const COLS = 25;
+    const COLORS = ["#1D4ED8", "#EF4444"]; // Google Antigravity branded shards
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initGrid();
+    };
+
+    // Particle Struct setup
+    class WaveParticle {
+      constructor(gridX, gridY) {
+        this.gridX = gridX; // Structural grid columns
+        this.gridY = gridY; // Structural grid rows
+        
+        this.size = Math.random() * 2 + 1.5;
+        this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        this.opacity = Math.random() * 0.4 + 0.2;
+        this.shapeType = Math.floor(Math.random() * 3); // Shard variations (Circles, squares, triangles)
+        this.rotation = Math.random() * Math.PI * 2;
+        
+        // Base anchor positions across viewport boundaries
+        this.anchorX = 0;
+        this.anchorY = 0;
+        
+        // Real-time calculated coordinates
+        this.x = 0;
+        this.y = 0;
+      }
+
+      update(time, mouseX, mouseY) {
+        // Distribute baseline positions perfectly across coordinates
+        this.anchorX = (canvas.width / (COLS - 1)) * this.gridX;
+        this.anchorY = (canvas.height / (ROWS - 1)) * this.gridY;
+
+        // Base background wave math oscillation (Floating state)
+        let offsetX = Math.sin(time * 0.02 + this.gridY) * 8;
+        let offsetY = Math.cos(time * 0.015 + this.gridX) * 12;
+
+        // Active cursor wave ripples distortion calculations
+        if (mouseX !== null && mouseY !== null) {
+          const dx = mouseX - this.anchorX;
+          const dy = mouseY - this.anchorY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Influence bubble setting
+          const waveRadius = 320;
+
+          if (distance < waveRadius) {
+            // Generates a ripple pushing force that follows the track shape
+            const force = (waveRadius - distance) / waveRadius;
+            const waveInertia = Math.sin(distance * 0.05 - time * 0.1) * 25;
+
+            offsetX += (dx / distance) * waveInertia * force;
+            offsetY += (dy / distance) * waveInertia * force;
+          }
+        }
+
+        this.x = this.anchorX + offsetX;
+        this.y = this.anchorY + offsetY;
+        this.rotation += 0.005;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+
+        ctx.beginPath();
+        if (this.shapeType === 0) {
+          ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+        } else if (this.shapeType === 1) {
+          ctx.rect(-this.size / 2, -this.size / 2, this.size, this.size);
+        } else {
+          ctx.moveTo(0, -this.size / 2);
+          ctx.lineTo(this.size / 2, this.size / 2);
+          ctx.lineTo(-this.size / 2, this.size / 2);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const initGrid = () => {
+      particles = [];
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          particles.push(new WaveParticle(c, r));
+        }
+      }
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      time++;
+
+      // Linear interpolation to make the mouse coordinate mapping buttery smooth
+      if (mouse.targetX !== null && mouse.targetY !== null) {
+        if (mouse.x === null) {
+          mouse.x = mouse.targetX;
+          mouse.y = mouse.targetY;
+        }
+        mouse.x += (mouse.targetX - mouse.x) * 0.1;
+        mouse.y += (mouse.targetY - mouse.y) * 0.1;
+      } else {
+        mouse.x = null;
+        mouse.y = null;
+      }
+
+      particles.forEach((particle) => {
+        particle.update(time, mouse.x, mouse.y);
+        particle.draw();
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const handleMouseMove = (e) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.targetX = null;
+      mouse.targetY = null;
+    };
+
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    resizeCanvas();
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#FAF9F5] px-6 py-16 text-black sm:px-8 md:px-12 lg:px-12">
 
@@ -12,6 +180,12 @@ export default function Home() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
         aria-hidden="true"
       >
+        {/* Antigravity Fluid Wave Mesh Layer */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 h-full w-full opacity-65 mix-blend-multiply"
+        />
+
         {/* Large moving blue glow */}
         <div
           className="
@@ -85,15 +259,7 @@ export default function Home() {
             animate-[spinReverse_18s_linear_infinite]
           "
         />
-
-        {/* Floating dots */}
-        <span className="absolute left-[15%] top-[25%] h-2 w-2 rounded-full bg-[#1D4ED8]/30 animate-[floatDot_5s_ease-in-out_infinite]" />
-
-        <span className="absolute right-[20%] top-[45%] h-1.5 w-1.5 rounded-full bg-[#1D4ED8]/30 animate-[floatDot_7s_ease-in-out_infinite]" />
-
-        <span className="absolute bottom-[20%] left-[12%] h-1.5 w-1.5 rounded-full bg-[#1D4ED8]/20 animate-[floatDot_6s_ease-in-out_infinite]" />
       </div>
-
       {/* =========================================================
           MAIN CONTENT
       ========================================================== */}
@@ -377,19 +543,6 @@ export default function Home() {
 
           to {
             transform: rotate(0deg);
-          }
-        }
-
-        @keyframes floatDot {
-          0%,
-          100% {
-            transform: translateY(0);
-            opacity: 0.25;
-          }
-
-          50% {
-            transform: translateY(-25px);
-            opacity: 0.7;
           }
         }
 
