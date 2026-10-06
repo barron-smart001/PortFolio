@@ -20,7 +20,7 @@ function Navbar() {
   ];
 
   // Keep the CV path in one place
-  const cvPath = "/Abasifreke_Monday_CV.pdf";
+  const cvPath = "/Abasifreke_Smart_Monday_CV.pdf";
 
   return (
     <>
@@ -72,7 +72,7 @@ function Navbar() {
           {/* CV */}
           <a
             href={cvPath}
-            download="Abasifreke_Monday_CV.pdf"
+            download="Abasifreke_Smart_Monday_CV.pdf"
             className="
               flex
               items-center

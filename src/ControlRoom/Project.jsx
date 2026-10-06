@@ -1,10 +1,10 @@
-import React from "react";
+// import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Project() {
   const works = [
     {
-      title: "Meridian — Forex & Financial Platform",
+      title: "Recordium — Forex & Financial Platform",
       status: "In Progress",
       statusColor: "bg-blue-50 text-blue-700 border-blue-200",
       isLive: true,
@@ -18,7 +18,7 @@ export default function Project() {
         "Financial UI",
       ],
       type: "FinTech Platform",
-      projectLink: "#",
+      projectLink: "https://beacon-keeper.vercel.app/",
     },
 
     {
@@ -108,10 +108,10 @@ export default function Project() {
             absolute
             -left-40
             -top-32
-            h-[380px]
-            w-[380px]
+            h-95
+            w-95
             rounded-full
-            bg-[#1D4ED8]/[0.07]
+            bg-[#1D4ED8]/7
             blur-[100px]
             animate-[projectOrbOne_12s_ease-in-out_infinite]
           "
@@ -123,10 +123,10 @@ export default function Project() {
             absolute
             -right-40
             top-[30%]
-            h-[420px]
-            w-[420px]
+            h-105
+            w-105
             rounded-full
-            bg-[#1D4ED8]/[0.05]
+            bg-[#1D4ED8]/5
             blur-[110px]
             animate-[projectOrbTwo_15s_ease-in-out_infinite]
           "
@@ -136,12 +136,12 @@ export default function Project() {
         <div
           className="
             absolute
-            bottom-[-180px]
+            -bottom-45
             left-[25%]
-            h-[400px]
-            w-[400px]
+            h-100
+            w-100
             rounded-full
-            bg-[#1D4ED8]/[0.04]
+            bg-[#1D4ED8]/4
             blur-[110px]
             animate-[projectOrbThree_18s_ease-in-out_infinite]
           "
@@ -153,11 +153,11 @@ export default function Project() {
             absolute
             -right-32
             top-16
-            h-[320px]
-            w-[320px]
+            h-80
+            w-80
             rounded-full
             border
-            border-[#1D4ED8]/[0.08]
+            border-[#1D4ED8]/8
             animate-[projectSpin_26s_linear_infinite]
           "
         />
@@ -228,7 +228,7 @@ export default function Project() {
         ======================================================== */}
         <section className="space-y-6 sm:space-y-8">
 
-          {works.map((item, index) => {
+          {works.map((item) => {
 
             const cardContent = (
               <div
@@ -261,7 +261,7 @@ export default function Project() {
                     h-40
                     w-40
                     rounded-full
-                    bg-[#1D4ED8]/[0.04]
+                    bg-[#1D4ED8]/4
                     blur-3xl
                     opacity-0
                     transition-opacity
@@ -319,7 +319,7 @@ export default function Project() {
                       mt-1
                       h-5
                       w-5
-                      flex-shrink-0
+                      shrink-0
                       text-gray-400
                       transition-all
                       duration-500
@@ -381,7 +381,7 @@ export default function Project() {
                     absolute
                     bottom-0
                     left-0
-                    h-[2px]
+                    h-0.5
                     w-0
                     bg-[#1D4ED8]
                     transition-all
