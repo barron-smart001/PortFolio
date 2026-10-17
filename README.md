@@ -1,16 +1,55 @@
-# React + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site of Abasifreke Smart Monday, a front-end developer. It showcases projects, background and skills, and has a contact form and a downloadable CV.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + Vite 8
+- Tailwind CSS 4 (via `@tailwindcss/vite`)
+- react-router-dom 7 for routing
+- framer-motion for animations
+- lucide-react for icons
+- Formspree (`@formspree/react`) for the contact form
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev       # start dev server
+npm run build     # production build
+npm run preview   # preview the production build
+npm run lint      # run ESLint
+```
 
-## Expanding the ESLint configuration
+## Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+index.html
+vite.config.js
+public/             CV PDF, favicon, icons
+src/
+  main.jsx          entry point
+  App.jsx           Router, Navbar and routes
+  ControlRoom/
+    Navbar.jsx      site-wide navigation
+    Home.jsx        /          hero and highlights
+    About.jsx       /About     background, skills, stack
+    Project.jsx     /Project   project cards with live links
+    Contact.jsx     /contact   Formspree-powered contact form
+```
+
+## Featured projects
+
+- TradeFrame: trading journal and performance platform
+- Skyview Hotels: booking and property management
+- Preshy Bare & Bloom: online storefront
+- Student Hub Platform
+- PrismView: personal finance dashboard
+- AI Forex Market Analysis Platform
+- This portfolio
+
+Project data lives in the `Project.jsx` array.
+
+## Deployment
+
+Static Vite build, deployable to Vercel or any static host. Client-side routing needs a fallback rewrite to `index.html`.
