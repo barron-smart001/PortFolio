@@ -281,6 +281,7 @@ const About = () => {
                   {[
                     "React",
                     "JavaScript (ES6+)",
+                    "TypeScript",
                     "Tailwind CSS",
                     "React Router",
                     "Vite",
@@ -309,7 +310,6 @@ const About = () => {
                 <ul className="space-y-3 text-sm font-medium text-gray-600">
 
                   {[
-                    "TypeScript",
                     "Advanced React Patterns",
                     "Backend Development",
                     "AI Integration",

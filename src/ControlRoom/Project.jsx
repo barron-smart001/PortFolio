@@ -4,21 +4,57 @@ import { Link } from "react-router-dom";
 export default function Project() {
   const works = [
     {
-      title: "Recordium — Forex & Financial Platform",
+      title: "TradeFrame — Trading Journal & Performance Platform",
       status: "In Progress",
       statusColor: "bg-blue-50 text-blue-700 border-blue-200",
       isLive: true,
       description:
-        "A financial technology platform currently being developed to bring market analysis, trading-focused workflows, and intelligent financial tools into a unified digital experience. The project combines modern frontend architecture with Supabase-backed functionality and a strong focus on usability.",
+        "A premium trading journal and performance platform for traders who want to trade with intention. It brings trade logging, financial record-keeping, goals, trading rules, analytics, and broker connections together, backed by Supabase authentication and Paystack-powered subscriptions.",
       tech: [
         "React",
         "Tailwind CSS",
         "Supabase",
-        "React Router",
-        "Financial UI",
+        "Paystack",
+        "Framer Motion",
       ],
       type: "FinTech Platform",
       projectLink: "https://beacon-keeper.vercel.app/",
+    },
+
+    {
+      title: "Skyview Hotels — Booking & Property Management",
+      status: "Completed",
+      statusColor: "bg-green-50 text-green-700 border-green-200",
+      isLive: true,
+      description:
+        "A production-oriented hotel booking and property-management platform. Guests can browse rooms and book online, with secure server-side Paystack payment verification, Supabase authentication, and row-level security protecting the data.",
+      tech: [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Paystack",
+        "Tailwind CSS",
+      ],
+      type: "Hospitality Platform",
+      projectLink: "https://skyview-hotel-delta.vercel.app/",
+    },
+
+    {
+      title: "Preshy Bare & Bloom — Online Storefront",
+      status: "Completed",
+      statusColor: "bg-green-50 text-green-700 border-green-200",
+      description:
+        "A product storefront for a fashion and footwear brand, built from reusable React components with the catalogue and business data kept separate from the UI so products can be edited without touching the layout.",
+      tech: [
+        "React",
+        "Vite",
+        "Lucide Icons",
+        "Component Architecture",
+        "Responsive UI",
+      ],
+      type: "E-Commerce",
+      isLive: true,
+      projectLink: "https://bare-and-bloom-one.vercel.app/",
     },
 
     {
