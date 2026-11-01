@@ -40,6 +40,24 @@ export default function Project() {
     },
 
     {
+      title: "TrueConnect — Verified Relationship Platform",
+      status: "Completed",
+      statusColor: "bg-green-50 text-green-700 border-green-200",
+      isLive: true,
+      description:
+        "An intent-based relationship platform for Africans worldwide, built around ID-verified members and locked relationship intent. It features a premium, responsive dark-and-gold interface with discovery, safety and membership flows that present the platform's trust model of verification, 90-day intent cycles and live matchmaking events.",
+      tech: [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Responsive UI",
+      ],
+      type: "Social Platform",
+      projectLink: "https://trueconnect-mu.vercel.app/",
+    },
+
+    {
       title: "Preshy Bare & Bloom — Online Storefront",
       status: "Completed",
       statusColor: "bg-green-50 text-green-700 border-green-200",

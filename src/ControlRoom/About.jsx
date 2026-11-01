@@ -134,31 +134,31 @@ const About = () => {
               <strong className="font-semibold text-black">
                 Abasifreke Smart Monday
               </strong>
-              , a Frontend Developer from Nigeria passionate about building
-              fast, scalable, and visually engaging web applications.
+              , a frontend developer based in Akwa Ibom, Nigeria. I build
+              thoughtful web products that pair polished, responsive
+              interfaces with useful functionality.
             </p>
 
             <p>
-              My journey into software development started with curiosity
-              about how modern digital products are built. That curiosity
-              became a passion for creating interfaces that don't just look
-              good—they solve meaningful problems.
+              My work spans fintech, hospitality, social platforms,
+              e-commerce, and education. I've built products including
+              TradeFrame, a trading journal; Skyview Hotels, a booking and
+              property-management platform; and TrueConnect, a verified
+              relationship platform.
             </p>
 
             <p>
-              Today, I focus on building responsive web applications with
-              React, JavaScript, Tailwind CSS, and modern frontend tooling,
-              with an emphasis on clean architecture, reusable components,
-              accessibility, and thoughtful user experiences.
+              Across these projects, I've worked with React and Next.js,
+              TypeScript, Supabase, and Paystack—building responsive
+              experiences and connecting them to authentication, data, and
+              payment flows.
             </p>
 
             <p>
-              Through the projects I've worked on, I've gained experience
-              across different areas—from responsive business websites and
-              interactive applications to financial dashboards and
-              developer-focused tools. Each project has strengthened my
-              problem-solving skills and helped me become a more thoughtful
-              engineer.
+              I enjoy taking a product from its core idea to a clear,
+              maintainable interface, paying attention to reusable components,
+              thoughtful interactions, and the details that make a product
+              easier to use.
             </p>
 
             {/* Quote */}
@@ -189,16 +189,15 @@ const About = () => {
             </h3>
 
             <p className="leading-relaxed">
-              My mission is to build products that improve productivity,
-              enhance financial decision-making, and create seamless digital
-              experiences that people genuinely enjoy using.
+              I'm drawn to products that make complex tasks easier—from
+              understanding trading performance and personal finances to
+              finding a hotel or organizing student resources.
             </p>
 
             <p className="leading-relaxed">
-              Whether I'm developing a modern portfolio, building business
-              applications, or creating financial tools, I enjoy transforming
-              ideas into practical, production-ready solutions that deliver
-              real value.
+              I turn those ideas into practical web experiences, balancing
+              clear interfaces with the integrations and product flows people
+              need to get things done.
             </p>
 
           </div>
@@ -232,9 +231,10 @@ const About = () => {
                   "Clean Architecture",
                   "Accessibility",
                   "Reusable Components",
-                  "API Integration",
                   "State Management",
-                  "UI/UX Implementation",
+                  "Authentication & Data Integration",
+                  "Payment Integration",
+                  "Dashboard & Data Visualization",
                 ].map((skill, index) => (
                   <span
                     key={skill}
@@ -280,12 +280,14 @@ const About = () => {
 
                   {[
                     "React",
+                    "Next.js",
                     "JavaScript (ES6+)",
                     "TypeScript",
                     "Tailwind CSS",
                     "React Router",
                     "Vite",
                     "Supabase",
+                    "Paystack",
                     "Git & GitHub",
                   ].map((technology) => (
                     <li
@@ -419,16 +421,16 @@ const About = () => {
             <div className="group rounded-xl border border-gray-200/60 bg-white p-5 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg">
 
               <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-gray-400">
-                Experience
+                Project Experience
               </span>
 
               <h4 className="mb-2 text-xl font-bold">
-                1+ Years Building
+                Across Multiple Industries
               </h4>
 
               <p className="text-sm leading-relaxed text-gray-500">
-                Building React applications, responsive interfaces, financial
-                dashboards, and interactive digital products.
+                From fintech and hospitality to social platforms, e-commerce,
+                and education, I build products around real user needs.
               </p>
             </div>
 
@@ -461,24 +463,24 @@ const About = () => {
             {/* Education */}
             <div className="group rounded-xl border border-gray-200/60 bg-white p-5 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-lg sm:col-span-2">
 
-              <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-gray-400">
-                Education & Qualifications
-              </span>
+            <span className="mb-1 block text-xs font-bold uppercase tracking-wider text-gray-400">
+  Education & Qualifications
+</span>
 
-              <h4 className="mb-2 text-lg font-bold">
-                Frontend Engineering Fellow — TalentPort
-              </h4>
+<h4 className="mb-2 text-lg font-bold">
+  Frontend Development Training — Start Innovation Hub
+</h4>
 
-              <p className="text-sm leading-relaxed text-gray-500">
-                Undergoing intensive professional frontend development
-                training and residency at{" "}
-                <span className="font-semibold text-black">
-                  TalentPort
-                </span>
-                , with a focus on turning complex designs into production-ready
-                applications, frontend architecture, and maintainable
-                component systems.
-              </p>
+<p className="text-sm leading-relaxed text-gray-500">
+  Successfully completed intensive frontend development training at{" "}
+  <span className="font-semibold text-black">
+    Start Innovation Hub, Uyo
+  </span>
+  , gaining practical experience in building modern, responsive web
+  applications using React.js, TypeScript, and Next.js. Continuing to
+  strengthen my engineering skills through independent learning,
+  hands-on projects, and exploration of backend development.
+</p>
             </div>
 
           </div>
