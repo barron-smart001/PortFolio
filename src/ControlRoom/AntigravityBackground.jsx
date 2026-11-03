@@ -2,20 +2,16 @@ import { useEffect, useRef } from "react";
 
 /**
  * AntigravityBackground
- * A full-screen particle field inspired by the Google Antigravity hero:
- * hundreds of small capsule "dashes" float in place, get pushed into a ring
- * around the cursor, rotate to face away from it, then spring back.
+ * A full-screen grid with an animated dot at every joint. Faint dark lines
+ * turn blue and glow toward the bottom edge; the dots pulse in a traveling
+ * wave and swell around the cursor.
  *
  * Usage: <AntigravityBackground />  (place it as the first child of the page)
  */
 export default function AntigravityBackground({
-  colors = [
-    "#1D4ED8", "#1D4ED8", "#1D4ED8", // weighted: mostly your brand blue
-    "#3B82F6", "#6366F1",
-    "#EF4444", "#F59E0B", "#10B981",
-  ],
-  density = 1, // 0.5 = fewer particles, 1.5 = more
-  radius = 170, // size of the cursor "bubble" in px
+  size = 48, // grid cell size in px
+  glow = "29, 78, 216", // rgb of the bottom glow
+  radius = 140, // cursor influence in px
   className = "",
 }) {
   const canvasRef = useRef(null);
@@ -30,62 +26,12 @@ export default function AntigravityBackground({
 
     let width = 0;
     let height = 0;
-    let dpr = 1;
-    let particles = [];
     let frameId = null;
     let t = 0;
-
-    // Pointer state (smoothed). `active` is false when the pointer is idle or gone,
-    // in which case a virtual cursor wanders slowly so the field stays alive (mobile too).
-    const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999, active: false, lastMove: 0 };
-
-    const rand = (min, max) => Math.random() * (max - min) + min;
-
-    // Shortest-path angle interpolation so dashes never spin the long way round.
-    const lerpAngle = (a, b, f) => {
-      let d = b - a;
-      while (d > Math.PI) d -= Math.PI * 2;
-      while (d < -Math.PI) d += Math.PI * 2;
-      return a + d * f;
-    };
-
-    const createParticles = () => {
-      const area = width * height;
-      const count = Math.round(Math.min(1100, Math.max(220, (area / 1500) * density)));
-
-      // Jittered grid gives an even, organic spread with no clumps or holes.
-      const cols = Math.ceil(Math.sqrt((count * width) / height));
-      const rows = Math.ceil(count / cols);
-      const cellW = width / cols;
-      const cellH = height / rows;
-
-      particles = [];
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const hx = (c + rand(0.15, 0.85)) * cellW;
-          const hy = (r + rand(0.15, 0.85)) * cellH;
-          const baseAngle = rand(0, Math.PI * 2);
-          particles.push({
-            hx, hy, // home position
-            x: hx, y: hy,
-            vx: 0, vy: 0,
-            angle: baseAngle,
-            baseAngle,
-            spin: rand(-0.004, 0.004),
-            len: rand(4, 9),
-            thick: rand(1.6, 2.4),
-            color: colors[Math.floor(Math.random() * colors.length)],
-            alpha: rand(0.35, 0.75),
-            phase: rand(0, Math.PI * 2),
-            drift: rand(4, 10),
-            scale: 1,
-          });
-        }
-      }
-    };
+    const pointer = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
 
     const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = Math.floor(width * dpr);
@@ -93,109 +39,58 @@ export default function AntigravityBackground({
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      createParticles();
       if (reduceMotion) draw();
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
-      ctx.lineCap = "round";
-      for (const p of particles) {
-        const half = (p.len * p.scale) / 2;
-        const cos = Math.cos(p.angle) * half;
-        const sin = Math.sin(p.angle) * half;
-        ctx.globalAlpha = Math.min(1, p.alpha * (0.75 + p.scale * 0.35));
-        ctx.strokeStyle = p.color;
-        ctx.lineWidth = p.thick * (0.85 + p.scale * 0.15);
-        ctx.beginPath();
-        ctx.moveTo(p.x - cos, p.y - sin);
-        ctx.lineTo(p.x + cos, p.y + sin);
-        ctx.stroke();
+      const R2 = radius * radius;
+
+      for (let y = 0.5; y < height + size; y += size) {
+        for (let x = 0.5; x < width + size; x += size) {
+          // Diagonal wave rolling across the grid.
+          const wave = Math.sin(x * 0.012 + y * 0.008 - t * 0.04);
+          let r = 1.8 + wave * 0.9;
+          let alpha = 0.45 + wave * 0.3;
+
+          const dx = x - pointer.x;
+          const dy = y - pointer.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < R2) {
+            const f = 1 - Math.sqrt(d2) / radius;
+            r += f * f * 3.5;
+            alpha += f * 0.4;
+          }
+
+          ctx.globalAlpha = Math.min(1, Math.max(0.1, alpha));
+          ctx.fillStyle = y > height * 0.5 ? `rgb(${glow})` : "#000";
+          ctx.beginPath();
+          ctx.arc(x, y, Math.max(0.5, r), 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
       ctx.globalAlpha = 1;
     };
 
-    const update = () => {
-      t += 1;
-
-      // Fall back to a slow wandering virtual cursor after 2.5s without movement.
-      const idle = !pointer.active || performance.now() - pointer.lastMove > 2500;
-      if (idle) {
-        pointer.tx = width * (0.5 + 0.32 * Math.sin(t * 0.0035));
-        pointer.ty = height * (0.45 + 0.28 * Math.sin(t * 0.0052 + 1.3));
-      }
-      if (pointer.x < -9000) {
-        pointer.x = pointer.tx;
-        pointer.y = pointer.ty;
-      }
-      const follow = idle ? 0.03 : 0.16;
-      pointer.x += (pointer.tx - pointer.x) * follow;
-      pointer.y += (pointer.ty - pointer.y) * follow;
-
-      const R = Math.min(radius, Math.max(110, width * 0.16));
-      const R2 = R * R;
-      const outer = R * 1.7;
-      const outer2 = outer * outer;
-
-      for (const p of particles) {
-        // Floating target: home position plus a gentle breathing drift.
-        const tx = p.hx + Math.sin(t * 0.012 + p.phase) * p.drift;
-        const ty = p.hy + Math.cos(t * 0.01 + p.phase * 1.3) * p.drift;
-
-        // Spring toward the floating target.
-        p.vx += (tx - p.x) * 0.035;
-        p.vy += (ty - p.y) * 0.035;
-
-        const dx = p.x - pointer.x;
-        const dy = p.y - pointer.y;
-        const d2 = dx * dx + dy * dy;
-        let targetScale = 1;
-        let targetAngle = p.baseAngle;
-
-        if (d2 < outer2) {
-          const d = Math.sqrt(d2) || 0.001;
-          const nx = dx / d;
-          const ny = dy / d;
-          targetAngle = Math.atan2(ny, nx); // face away from the cursor
-
-          if (d2 < R2) {
-            // Push outward (strongest at the centre) plus a little swirl.
-            const f = 1 - d / R;
-            const push = f * f * 5.5;
-            p.vx += nx * push - ny * f * 0.6;
-            p.vy += ny * push + nx * f * 0.6;
-          }
-          // Particles grow a little as they ride the ring edge.
-          const ring = 1 - Math.abs(d - R) / (outer - R * 0.4);
-          targetScale = 1 + Math.max(0, ring) * 0.9;
-          p.angle = lerpAngle(p.angle, targetAngle, 0.18);
-        } else {
-          p.baseAngle += p.spin;
-          p.angle = lerpAngle(p.angle, targetAngle, 0.04);
-        }
-
-        p.vx *= 0.82; // damping
-        p.vy *= 0.82;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.scale += (targetScale - p.scale) * 0.12;
-      }
-    };
-
     const loop = () => {
-      update();
+      t += 1;
+      pointer.x += (pointer.tx - pointer.x) * 0.2;
+      pointer.y += (pointer.ty - pointer.y) * 0.2;
       draw();
       frameId = requestAnimationFrame(loop);
     };
 
     const onPointerMove = (e) => {
+      if (pointer.x < -9000) {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+      }
       pointer.tx = e.clientX;
       pointer.ty = e.clientY;
-      pointer.active = true;
-      pointer.lastMove = performance.now();
     };
     const onPointerLeave = () => {
-      pointer.active = false;
+      pointer.x = pointer.tx = -9999;
+      pointer.y = pointer.ty = -9999;
     };
     const onVisibility = () => {
       if (document.hidden) {
@@ -223,14 +118,53 @@ export default function AntigravityBackground({
       document.removeEventListener("visibilitychange", onVisibility);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [density, radius]);
+  }, [size, glow, radius]);
+
+  const grid = (color) =>
+    `linear-gradient(to right, ${color} 1px, transparent 1px), linear-gradient(to bottom, ${color} 1px, transparent 1px)`;
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
       aria-hidden="true"
       className={className}
       style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
-    />
+    >
+      {/* Base grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: grid("rgba(0, 0, 0, 0.08)"),
+          backgroundSize: `${size}px ${size}px`,
+          // Black lines fade out exactly where the blue ones fade in, so they never overlap.
+          WebkitMaskImage: "linear-gradient(to top, transparent 45%, black 55%)",
+          maskImage: "linear-gradient(to top, transparent 45%, black 55%)",
+        }}
+      />
+
+      {/* Blue glow rising from the bottom */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `linear-gradient(to top, rgba(${glow}, 0.22), rgba(${glow}, 0) 45%)`,
+        }}
+      />
+
+      {/* Brighter blue grid lines, only visible near the bottom */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: grid(`rgba(${glow}, 0.35)`),
+          backgroundSize: `${size}px ${size}px`,
+          WebkitMaskImage: "linear-gradient(to top, black 45%, transparent 55%)",
+          maskImage: "linear-gradient(to top, black 45%, transparent 55%)",
+        }}
+      />
+
+      {/* Animated dots on every joint */}
+      <canvas ref={canvasRef} style={{ position: "absolute", inset: 0 }} />
+    </div>
   );
 }

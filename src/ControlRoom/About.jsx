@@ -6,81 +6,6 @@ const About = () => {
     <main className="relative min-h-screen overflow-hidden bg-[#FAF9F5] px-6 py-16 text-black md:px-12">
 
       {/* =========================================================
-          ANIMATED BACKGROUND
-      ========================================================== */}
-      <div
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-        aria-hidden="true"
-      >
-        {/* Main ambient glow */}
-        <div
-          className="
-            absolute
-            -left-40
-            -top-32
-            h-[380px]
-            w-[380px]
-            rounded-full
-            bg-[#1D4ED8]/[0.07]
-            blur-[100px]
-            animate-[aboutFloatOne_12s_ease-in-out_infinite]
-          "
-        />
-
-        {/* Secondary ambient glow */}
-        <div
-          className="
-            absolute
-            -right-40
-            top-[25%]
-            h-[400px]
-            w-[400px]
-            rounded-full
-            bg-[#1D4ED8]/[0.05]
-            blur-[110px]
-            animate-[aboutFloatTwo_15s_ease-in-out_infinite]
-          "
-        />
-
-        {/* Bottom ambient glow */}
-        <div
-          className="
-            absolute
-            bottom-[-180px]
-            left-[25%]
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-[#1D4ED8]/[0.035]
-            blur-[120px]
-            animate-[aboutFloatThree_18s_ease-in-out_infinite]
-          "
-        />
-
-        {/* Decorative rotating circle */}
-        <div
-          className="
-            absolute
-            -right-24
-            top-20
-            h-[300px]
-            w-[300px]
-            rounded-full
-            border
-            border-[#1D4ED8]/[0.08]
-            animate-[aboutSpin_24s_linear_infinite]
-          "
-        />
-
-        {/* Small floating accents */}
-        <span className="absolute left-[12%] top-[25%] h-2 w-2 rounded-full bg-[#1D4ED8]/30 animate-[aboutPulse_5s_ease-in-out_infinite]" />
-
-        <span className="absolute right-[18%] top-[48%] h-1.5 w-1.5 rounded-full bg-[#1D4ED8]/25 animate-[aboutPulse_7s_ease-in-out_infinite]" />
-
-        <span className="absolute bottom-[18%] left-[18%] h-1.5 w-1.5 rounded-full bg-[#1D4ED8]/20 animate-[aboutPulse_6s_ease-in-out_infinite]" />
-      </div>
-
-      {/* =========================================================
           MAIN CONTENT
       ========================================================== */}
       <div className="relative z-10 mx-auto max-w-4xl">
@@ -583,66 +508,7 @@ const About = () => {
 
       </div>
 
-      {/* =========================================================
-          ANIMATION KEYFRAMES
-      ========================================================== */}
       <style>{`
-        @keyframes aboutFloatOne {
-          0%,
-          100% {
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-
-          50% {
-            transform: translate3d(90px, 60px, 0) scale(1.15);
-          }
-        }
-
-        @keyframes aboutFloatTwo {
-          0%,
-          100% {
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-
-          50% {
-            transform: translate3d(-80px, 70px, 0) scale(1.12);
-          }
-        }
-
-        @keyframes aboutFloatThree {
-          0%,
-          100% {
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-
-          50% {
-            transform: translate3d(70px, -60px, 0) scale(1.1);
-          }
-        }
-
-        @keyframes aboutSpin {
-          from {
-            transform: rotate(0deg);
-          }
-
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes aboutPulse {
-          0%,
-          100% {
-            opacity: 0.2;
-            transform: translateY(0) scale(1);
-          }
-
-          50% {
-            opacity: 0.7;
-            transform: translateY(-20px) scale(1.3);
-          }
-        }
-
         @media (prefers-reduced-motion: reduce) {
           *,
           *::before,
