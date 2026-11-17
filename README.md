@@ -42,6 +42,7 @@ src/
 
 - TradeFrame: trading journal and performance platform
 - Skyview Hotels: booking and property management
+- TENT: building materials storefront and business-management platform (in progress)
 - Preshy Bare & Bloom: online storefront
 - Student Hub Platform
 - PrismView: personal finance dashboard

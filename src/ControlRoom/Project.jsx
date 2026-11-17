@@ -58,6 +58,23 @@ export default function Project() {
     },
 
     {
+      title: "TENT — Building Materials & Construction Supply",
+      status: "In Progress",
+      statusColor: "bg-blue-50 text-blue-700 border-blue-200",
+      description:
+        "An e-commerce storefront and business-management platform for TENT, a building-materials supplier. The storefront and admin tools cover product catalogues, categories, and inventory; Supabase integration, checkout, and broader business-management features are still in development.",
+      tech: [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS",
+        "Supabase",
+      ],
+      type: "E-Commerce & Business Platform",
+      projectLink: "#",
+    },
+
+    {
       title: "Preshy Bare & Bloom — Online Storefront",
       status: "Completed",
       statusColor: "bg-green-50 text-green-700 border-green-200",
